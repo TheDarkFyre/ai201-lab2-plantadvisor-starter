@@ -70,7 +70,12 @@ likely match for clean user input. Aliases are the broadest net, so they go last
 *Aliases are stored as a list of strings. How will you check if the normalized input matches any alias in the list? Write your approach in pseudocode or plain English.*
 
 ```
-[your answer here]
+For each plant in the database:
+  Lowercase every alias in plant["aliases"]
+  Check if normalized input is in that lowercased list
+  If yes, return that plant as a match
+
+In Python: normalized in [alias.lower() for alias in plant["aliases"]]
 ```
 
 ---
@@ -80,7 +85,7 @@ likely match for clean user input. Aliases are the broadest net, so they go last
 *When a plant isn't found, the agent will read your message and use it to decide what to tell the user. Write the exact string you'll return — make it useful to the agent, not just to a human reading logs.*
 
 ```
-[your answer here]
+"No plant named '{normalized}' was found in the database. The database contains common houseplants like pothos, monstera, snake plant, fiddle leaf fig, peace lily, and others. If the user described the plant or used an unusual name, offer general care advice based on their description."
 ```
 
 ---
@@ -91,12 +96,12 @@ likely match for clean user input. Aliases are the broadest net, so they go last
 
 **Test: does `"devil's ivy"` return the pothos entry?**
 ```
-[yes / no — if no, describe what happened]
+yes
 ```
 
 **Test: does `"SNAKE PLANT"` return the snake plant entry?**
 ```
-[yes / no — if no, describe what happened]
+yes
 ```
 
 **One edge case you discovered while implementing:**
@@ -183,12 +188,12 @@ The full season dict from `_season_data`, plus a `detected_season` boolean. Exam
 
 **Test: does calling with `season=None` return the correct season for the current month?**
 ```
-Current month: [month]
-Expected season: [season]
-Returned season: [season]
+Current month: June
+Expected season: Summer
+Returned season: Summer
 ```
 
 **Test: does calling with `season="winter"` return winter data regardless of the current month?**
 ```
-[yes / no]
+no
 ```
